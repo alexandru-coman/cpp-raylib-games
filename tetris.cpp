@@ -33,6 +33,7 @@ int main() {
     while (!WindowShouldClose()) {
         tetris->Update();
         BeginDrawing();
+        ClearBackground(BLACK);
         tetris->Draw();
         EndDrawing();
     }

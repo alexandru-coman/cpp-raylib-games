@@ -131,11 +131,30 @@ public:
         DrawText(TextFormat("%d", lines), px, 115, 26, SKYBLUE);
         DrawText("NEXT",  px, 160, 20, WHITE);
         if (next_) {
-            // preview offset
-            for (const auto& c : next_->cells)
-                DrawRectangle(px + static_cast<int>(c.x)*22,
-                              190 + static_cast<int>(c.y)*22,
-                              21, 21, next_->color);
+            Shape localShape = ShapeFor(next_->type);
+            
+            // Calculate bounding box to perfectly center it
+            float minX = localShape[0].x;
+            float maxX = localShape[0].x;
+            float minY = localShape[0].y;
+            float maxY = localShape[0].y;
+            
+            for (const auto& c : localShape) {
+                if (c.x < minX) minX = c.x;
+                if (c.x > maxX) maxX = c.x;
+                if (c.y < minY) minY = c.y;
+                if (c.y > maxY) maxY = c.y;
+            }
+            float pieceWidth = (maxX - minX + 1) * CELL;
+            
+            // Center horizontally within the PANEL (which is 180px wide)
+            float startX = px + (PANEL - pieceWidth) / 2.0f - minX * CELL;
+            float startY = 200.0f - minY * CELL; 
+            
+            for (const auto& c : localShape)
+                DrawRectangle(static_cast<int>(startX + c.x * CELL),
+                              static_cast<int>(startY + c.y * CELL),
+                              CELL - 1, CELL - 1, next_->color);
         }
         if (gameOver)
             DrawText("GAME OVER", COLS*CELL/2 - 80, ROWS*CELL/2 - 20, 36, RED);
