@@ -1,45 +1,60 @@
-# Motor Grafic C++ — Raylib & OOP
+# 🎮 C++ Raylib Retro Games (Pong & Tetris)
 
-Două jocuri complete construite cu **Raylib** și tehnici **C++ Modern**.
+![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg) ![Raylib](https://img.shields.io/badge/Raylib-5.0-red.svg) ![License](https://img.shields.io/badge/License-Open_Source-green.svg)
 
-## Structura proiectului
+Două jocuri complete construite cu **Raylib** și tehnici **C++ Modern**. Acest proiect demonstrează folosirea programării orientate pe obiecte (OOP), a șabloanelor (templates) și a bibliotecii standard C++ (STL) în dezvoltarea jocurilor 2D.
 
-```
-src/
+## 📂 Structura proiectului
+
+```text
+.
 ├── IGameObject.hpp   # Interfață abstractă + GameObjectManager<T> template
 ├── Ball.hpp          # Mingea Pong cu factory method
 ├── Paddle.hpp        # Paddle (jucător) + CpuPaddle (AI) — moștenire & polimorfism
 ├── Tetris.hpp        # Tetromino + TetrisGame — board STL, ghost piece, scoring
-├── pong.cpp          # Entry point Pong
-├── tetris.cpp        # Entry point Tetris
+├── pong.cpp          # Entry point pentru Pong
+├── tetris.cpp        # Entry point pentru Tetris
 └── CMakeLists.txt    # Build system (C++17, FetchContent pentru Raylib)
 ```
 
-## Caracteristici C++ Modern folosite
+## 🧠 Caracteristici C++ Modern folosite
 
-| Concept | Utilizare |
+| Concept | Utilizare în proiect |
 |---|---|
-| `std::unique_ptr` | Ownership exclusiv al Ball, Paddle, CpuPaddle, Tetromino, TetrisGame |
+| `std::unique_ptr` | Ownership exclusiv al *Ball, Paddle, CpuPaddle, Tetromino, TetrisGame* |
 | `std::make_unique` | Factory methods: `Ball::Create`, `Paddle::Create`, `Tetromino::Spawn` |
 | Template `GameObjectManager<T>` | Container generic pentru orice `IGameObject`; validat la compile-time cu `static_assert` |
 | `std::vector<Vector2>` | Trail vizual al mingii (Pong) |
 | `std::array<std::array<Color,COLS>,ROWS>` | Board Tetris fără alocare pe heap |
-| `std::all_of` | Detectare linie completă în Tetris |
-| `std::remove_if` | Eliminarea obiectelor moarte din GameObjectManager |
+| Algoritmi STL | `std::all_of` pentru detectare linie completă în Tetris; `std::remove_if` pentru eliminarea obiectelor moarte |
 | `std::map<PieceType,Color>` | Paleta de culori per tip de piesă |
-| Virtual + override | `IGameObject::Draw()`, `IGameObject::Update()` → Paddle, CpuPaddle, Ball, Tetromino |
-| `constexpr` + `inline` | Constante de culoare și dimensiuni fără overhead runtime |
+| `virtual` + `override` | `IGameObject::Draw()`, `IGameObject::Update()` implementate în derivate |
+| `constexpr` + `inline` | Constante de culoare și dimensiuni rezolvate la compilare |
 
-## Build
+## 🚀 Cum să rulezi jocurile (Build)
+
+Asigură-te că ai **CMake** și un compilator C++ instalat. Raylib se va descărca și compila automat via `FetchContent`.
 
 ```bash
+# 1. Generează fișierele de build
 cmake -B build -S .
+
+# 2. Compilează jocurile
 cmake --build build
+
+# 3. Rulează Pong
 ./build/pong
+
+# 4. Rulează Tetris
 ./build/tetris
 ```
 
-## Taste
+## ⌨️ Controale
 
-**Pong:** `↑` / `↓` — mișcare paletă jucător  
-**Tetris:** `←` `→` mișcare, `↑` rotire, `↓` soft drop
+🕹️ **Pong:**
+* `↑` / `↓` — Mișcare paletă jucător (stânga)
+
+🧩 **Tetris:**
+* `←` `→` — Mișcare stânga/dreapta
+* `↑` — Rotire piesă
+* `↓` — Soft drop (coborâre rapidă)
