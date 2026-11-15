@@ -1,6 +1,6 @@
 # 🎮 C++ Raylib Retro Games (Pong & Tetris)
 
-![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg) ![Raylib](https://img.shields.io/badge/Raylib-5.0-red.svg) ![License](https://img.shields.io/badge/License-Open_Source-green.svg)
+![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg) ![Raylib](https://img.shields.io/badge/Raylib-5.0-red.svg) [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](./LICENSE)
 
 Două jocuri complete construite cu **Raylib** și tehnici **C++ Modern**. Acest proiect demonstrează folosirea programării orientate pe obiecte (OOP), a șabloanelor (templates) și a bibliotecii standard C++ (STL) în dezvoltarea jocurilor 2D.
 
@@ -58,3 +58,7 @@ cmake --build build
 * `←` `→` — Mișcare stânga/dreapta
 * `↑` — Rotire piesă
 * `↓` — Soft drop (coborâre rapidă)
+
+## 📄 License
+
+This project is released under the [MIT License](./LICENSE).
